@@ -44,3 +44,31 @@ end
 
 println(value)  #value = 4.000000000000001 + 0.0im
 
+# We can also use exponent to a power. 
+
+power_1 = exp(1+1im)
+power_2 = exp(1-1im)
+power_3 = exp(1)
+power_4 = exp(1im) 
+
+
+# We now will check a certain property for several values of complex numbers
+
+
+values = [0, 1, 2, 3, 4, 1im, 2im, 3im, 4im, 1+1im, 1+2im, 2-1im, 1-2im]
+property_true = true
+for value in values
+    property_true = exp(1im*conj(value)) == conj(exp(1im*value))
+    println(exp(1im*conj(value)))
+    println(conj(exp(1im*value)))
+    if !property_true
+        println("$value is false")
+    end
+end
+
+# This helps us identify that the property is valid only when value = 0 + 0im
+
+# Let us examine the function 1/(1+exp(z))
+
+
+
