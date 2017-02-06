@@ -22,7 +22,7 @@ end
 
 
 function create_strip(tur_mach::TuringMachine, integer1, integer2)
-        tur_mach.strip = ["-"]
+        tur_mach.strip = []
         for i=1:integer1
             push!(tur_mach.strip, "x")
         end
@@ -58,19 +58,34 @@ function readInstruction(tur_mach::TuringMachine, index::Int64)
     end
 end
 
-function performTask()
-
+function performTask(tur_mach::TuringMachine)
+    while tur_mach.current_state != 0
+        for index = 1:length(tur_mach.instructions)
+            readInstruction(tur_mach, index)
+        end
+    end
 end
 
+function printStrip(tur_mach::TuringMachine)
+    for item in tur_mach.strip
+        print(item)
+    end
+    println()
+end
 
 turing_machine = TuringMachine()
 
 create_strip(turing_machine, 3, 4)
-print(turing_machine.strip)
+printStrip(turing_machine)
 
+addInstruction(turing_machine, [1, "x", "R", 1])
 addInstruction(turing_machine, [1, "-", "x", 2])
-readInstruction(turing_machine, 1)
+addInstruction(turing_machine, [2, "x", "R", 2])
+addInstruction(turing_machine, [2, "-", "L", 3])
+addInstruction(turing_machine, [3, "x", "-", 0])
+
+performTask(turing_machine)
 
 
-print(turing_machine.strip)
+printStrip(turing_machine)
 
